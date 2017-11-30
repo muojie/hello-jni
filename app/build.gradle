@@ -1,26 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.example.hellojni"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
 
-        ndk {
-            moduleName "hello-jni"      //libhello-jni.so
-        }
-
-        testApplicationId "com.example.hellojni.tests"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-    }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs 'src/main/jniLibs'  //set .so files location to libs
-            jni.srcDirs = []        //disable automatic ndk-build call
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
         }
     }
 
@@ -30,4 +26,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
