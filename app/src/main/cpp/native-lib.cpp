@@ -53,7 +53,7 @@ Java_com_example_hellojni_MainActivity_exception(JNIEnv *env, jobject instance) 
     if(_jthrowable!=NULL){
         //为了保证java的代码能继续执行，清除异常
         env->ExceptionClear();
-         jfieldID1 = env->GetFieldID(_jcalss,"name","Ljava/lang/String;");
+        jfieldID1 = env->GetFieldID(_jcalss,"name","Ljava/lang/String;");
     }
     jstring  _jstring = (jstring) env->GetObjectField(instance, jfieldID1);
     char* str = (char *) env->GetStringUTFChars(_jstring, NULL);
@@ -85,7 +85,7 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_example_hellojni_MainActivity_getArray(JNIEnv *env, jobject instance, jintArray arrays_) {
     jclass _jcalss = env->GetObjectClass(instance);
-    jfieldID jfieldID1 = env->GetFieldID(_jcalss,"name2","Ljava/lang/String;");
+    jfieldID jfieldID1 = env->GetFieldID(_jcalss,"name","Ljava/lang/String;");
     jint *arrays = env->GetIntArrayElements(arrays_, NULL);
     //获取数组长度
     int _len = env->GetArrayLength(arrays_);

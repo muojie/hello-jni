@@ -27,25 +27,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        //tv.setText(getMethod());
+        tv.setText(getMethod());
         //数组的访问
         getArray(source);
         for (int i=0;i<source.length;i++){
             Log.e("source",source[i]+"");
         }
         //异常的处理 C++的的异常，JAVA 是无法try catch的,如果jni层面出现了异常，那么java的代码调用中止
-//       try {
-//           exception();
-//       }catch (Exception e){
-//           Log.e("exception",e.getMessage());
-//
-//       }
-//        Log.e("exception","------------------------");
+       try {
+           exception();
+       }catch (Exception e){
+           Log.e("exception",e.getMessage());
+
+       }
+        Log.e("exception","------------------------");
 
 //        //缓存策略问题
-//                for(int i=0;i<10;i++){
-//                    cachede();
-//                }
+//        for(int i=0;i<10;i++){
+//            cachede();
+//        }
     }
 
     public String getName(){
