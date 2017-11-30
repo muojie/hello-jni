@@ -25,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ClassLoader classLoader = getClassLoader();
+        if (classLoader != null) {
+            Log.e("classloader", classLoader.toString());
+            while (classLoader.getParent() != null) {
+                classLoader = classLoader.getParent();
+                Log.e("classloader", classLoader.toString());
+            }
+        }
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(getMethod());
@@ -67,6 +75,5 @@ public class MainActivity extends AppCompatActivity {
     //缓存策略---对象的生命周期的
     public native void cachede();
     public native static void init();
-
 
 }
