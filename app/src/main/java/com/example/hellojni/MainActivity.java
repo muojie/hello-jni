@@ -9,7 +9,21 @@ import android.util.Log;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.hellojni.dagger2.ApiService;
+import com.example.hellojni.dagger2.DaggerUserComponent;
+import com.example.hellojni.dagger2.UserManager;
+import com.example.hellojni.dagger2.UserModule;
+
+import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    UserManager mUserManager;
+
+    OkHttpClient okhttp1;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -50,10 +64,18 @@ public class MainActivity extends AppCompatActivity {
        }
         Log.e("exception","------------------------");
 
+        testForDagger2();
 //        //缓存策略问题
 //        for(int i=0;i<10;i++){
 //            cachede();
 //        }
+    }
+
+    private void testForDagger2() {
+        DaggerUserComponent.builder().userModule(new UserModule()).
+                build().inject(this);
+        mUserManager.login();
+        mUserManager.register();
     }
 
     public String getName(){
